@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud & DevOps Engineer Resume</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #222;
+            background-color: #f4f4f4;
+            line-height: 1.4;
+            font-size: 13px;
+        }
+        .page {
+            width: 8.5in;
+            height: 11in;
+            background: #fff;
+            margin: 20px auto;
+            padding: 0.4in 0.5in;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        h1 {
+            font-size: 22px;
+            color: #0056b3;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .subtitle {
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 4px;
+        }
+        .contact {
+            font-size: 11px;
+            color: #555;
+        }
+        .contact span {
+            margin-right: 12px;
+        }
+        section {
+            margin-bottom: 10px;
+        }
+        h2 {
+            font-size: 13px;
+            color: #0056b3;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 2px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            row-gap: 3px;
+            font-size: 12px;
+        }
+        .skills-category {
+            font-weight: bold;
+            color: #333;
+        }
+        .job {
+            margin-bottom: 8px;
+        }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            font-size: 12.5px;
+            color: #222;
+        }
+        .job-title {
+            font-style: italic;
+            color: #444;
+            font-size: 11.5px;
+            margin-bottom: 3px;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 16px;
+        }
+        li {
+            margin-bottom: 2px;
+            font-size: 11.5px;
+            color: #333;
+        }
+        .education-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+        @media print {
+            body {
+                background: none;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                height: 100%;
+                padding: 0.3in 0.4in;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <header>
+        <h1>Ghislain Kameni</h1>
+        <div class="subtitle">Senior Cloud & DevOps Engineer</div>
+        <div class="contact">
+            <span><strong>Phone:</strong> (555) 019-2831</span>
+            <span><strong>Email:</strong> raphael.kameni@example.com</span>
+            <span><strong>Location:</strong> Houston, TX</span>
+            <span><strong>LinkedIn:</strong> linkedin.com/in/example</span>
+            <span><strong>GitHub:</strong> github.com/example</span>
+        </div>
+    </header>
+
+    <section>
+        <h2>Professional Summary</h2>
+        <p style="font-size: 11.5px; color: #333;">
+            Results-driven Cloud & DevOps Engineer with 6 years of hands-on experience designing, automating, and scaling high-availability enterprise infrastructure across AWS and hybrid Linux environments. Specialized in Infrastructure as Code (Terraform), CI/CD pipeline automation (Jenkins, GitHub Actions), container orchestration (Docker, ECS, Kubernetes), and security configuration management (Ansible). Proven track record of reducing deployment overhead and optimizing cloud architectures.
+        </p>
+    </section>
+
+    <section>
+        <h2>Technical Core Competencies</h2>
+        <div class="skills-grid">
+            <div class="skills-category">Cloud Platforms:</div>
+            <div>AWS (EC2, VPC, S3, ECS, Fargate, ALB, IAM, CloudFront, ACM, CloudWatch)</div>
+            
+            <div class="skills-category">IaC & Automation:</div>
+            <div>Terraform, Ansible, RHEL System Roles, CloudFormation, Jinja2</div>
+            
+            <div class="skills-category">Containers & CI/CD:</div>
+            <div>Docker, Kubernetes, OpenShift, Jenkins, GitHub Actions, Git</div>
+            
+            <div class="skills-category">Linux & Scripting:</div>
+            <div>RHEL/CentOS, Debian, Bash Scripting, Python, Systemd, LVM, Network/Firewalld</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Professional Experience</h2>
+
+        <div class="job">
+            <div class="job-header">
+                <span>National Oilwell Varco</span>
+                <span>2024 – Present</span>
+            </div>
+            <div class="job-title">Infrastructure Automation Engineer</div>
+            <ul>
+                <li>Architected reusable Terraform modules to automate AWS VPC, EC2, and ECS Fargate deployments, reducing provisioning cycles by 60%.</li>
+                <li>Built automated CI/CD pipelines using Jenkins and GitHub Actions with AWS OIDC authentication, accelerating deployment speed.</li>
+                <li>Developed modular Ansible playbooks to manage production user access, SSH key distribution, and security hardening across 100+ Linux instances.</li>
+                <li>Configured Application Load Balancers (ALB) and target-tracking auto-scaling policies to maintain 99.99% service availability during traffic spikes.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span>CenterPoint Energy</span>
+                <span>2020 – 2024</span>
+            </div>
+            <div class="job-title">Systems & GIS Engineer</div>
+            <ul>
+                <li>Administered enterprise Linux environments (RHEL), managing LVM storage, firewalld policies, system roles, and patch management.</li>
+                <li>Integrated Ansible with Terraform using local-exec provisions to automatically configure newly created AWS instances post-provisioning.</li>
+                <li>Optimized cloud storage infrastructure on AWS S3 and automated dynamic DNS records and certificate management via ACM.</li>
+                <li>Collaborated with cybersecurity teams to perform vulnerability remediation, SIEM root-cause analysis, and system hardening.</li>
+            </ul>
+        </div>
+
+        <div class="job">
+            <div class="job-header">
+                <span>DR Financial Services / iCare Medical</span>
+                <span>2018 – 2020</span>
+            </div>
+            <div class="job-title">Systems Administrator</div>
+            <ul>
+                <li>Managed virtualized infrastructure on VMware ESXi and vSphere alongside core Linux/Unix servers.</li>
+                <li>Automated daily system maintenance, backup verification, and log rotation tasks using custom Bash and Python scripts.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Certifications & Education</h2>
+        <div class="education-item">
+            <span><strong>Red Hat Certified Engineer (RHCE - EX294)</strong> – Red Hat Enterprise Linux 9</span>
+            <span>In Progress / Target 2026</span>
+        </div>
+        <div class="education-item" style="margin-top: 2px;">
+            <span><strong>Bachelor of Science in Information Technology</strong></span>
+            <span>Graduated 2018</span>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
