@@ -1,4 +1,4 @@
-name: Build and Push Image
+name: Build and Scan and Push Image
 
 on:
   push:
@@ -10,12 +10,10 @@ permissions:
   contents: read
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -26,18 +24,32 @@ jobs:
           aws-region: ${{ vars.AWS_REGION }}
 
       - name: Login to Amazon ECR
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker Image
         run: |
-          docker build -t ${{ vars.ECR_REPOSITORY }} .
+          docker build -t ${{ vars.ECR_REPOSITORY }}:latest .
+
+      # ------------------------------------------------------------------
+      # Security Scan Step (Trivy Container Scan)
+      # ------------------------------------------------------------------
+      - name: Run Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@v0.35.0
+        with:
+          image-ref: '${{ vars.ECR_REPOSITORY }}:latest'
+          format: 'table'
+          exit-code: '0' # Set to '1' to block the build on HIGH/CRITICAL vulnerabilities
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
 
       - name: Tag Docker Image
         run: |
           docker tag ${{ vars.ECR_REPOSITORY }}:latest \
-          ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
 
       - name: Push Docker Image
         run: |
           docker push \
-          ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
