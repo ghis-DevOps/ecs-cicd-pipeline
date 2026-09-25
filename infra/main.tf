@@ -17,10 +17,10 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
-# GitHub repository allowed to deploy from its main branch.
-variable "github_repository" {
-  type    = string
-  default = "ghis-DevOps/ecs-cicd-pipeline"
+# GitHub's immutable OIDC subject for ghis-DevOps/ecs-cicd-pipeline.
+# New repositories include the owner and repository IDs in the subject claim.
+locals {
+  github_oidc_subject = "repo:ghis-DevOps@113010720/ecs-cicd-pipeline@1372323898:ref:refs/heads/main"
 }
 
 # GitHub Actions OIDC federation for the CI/CD workflow.
@@ -44,7 +44,7 @@ resource "aws_iam_role" "github_actions" {
         Condition = {
           StringEquals = {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
-            "token.actions.githubusercontent.com:sub" = "repo:${var.github_repository}:ref:refs/heads/main"
+            "token.actions.githubusercontent.com:sub" = local.github_oidc_subject
           }
         }
       }
