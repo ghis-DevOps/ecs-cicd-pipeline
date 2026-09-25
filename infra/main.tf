@@ -17,6 +17,41 @@ variable "aws_region" {
   default = "us-east-1"
 }
 
+# GitHub repository allowed to deploy from its main branch.
+variable "github_repository" {
+  type    = string
+  default = "ghis-DevOps/ecs-cicd-pipeline"
+}
+
+# GitHub Actions OIDC federation for the CI/CD workflow.
+resource "aws_iam_openid_connect_provider" "github" {
+  url            = "https://token.actions.githubusercontent.com"
+  client_id_list = ["sts.amazonaws.com"]
+}
+
+resource "aws_iam_role" "github_actions" {
+  name = "github-actions-ecs-cicd"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Federated = aws_iam_openid_connect_provider.github.arn
+        }
+        Action = "sts:AssumeRoleWithWebIdentity"
+        Condition = {
+          StringEquals = {
+            "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
+            "token.actions.githubusercontent.com:sub" = "repo:${var.github_repository}:ref:refs/heads/main"
+          }
+        }
+      }
+    ]
+  })
+}
+
 # ------------------------------------------------------------------------------
 # Availability Zones Data Source
 # ------------------------------------------------------------------------------
@@ -272,4 +307,9 @@ output "alb_dns_name" {
 output "vpc_id" {
   description = "The ID of the created VPC"
   value       = module.vpc.vpc_id
+}
+
+output "github_actions_role_arn" {
+  description = "Set this value as the GitHub Actions AWS_ROLE_ARN secret"
+  value       = aws_iam_role.github_actions.arn
 }
